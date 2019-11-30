@@ -1,0 +1,56 @@
+{
+  "MaturityLevel": 1,
+  "volumes": [
+    {
+      "name": "<name>",
+      "host": {
+        "sourcePath": "/var/proj/1stproj"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "gitlab",
+	  "repo": "https://hub.docker.com",
+      "image": "gitlab/gitlab-ee",
+      "essential": true
+    },
+    {
+      "name": "artifactory",
+	  "repo": "https://gitlab.dell.com/devops/docker-store/jfrog-cli-devops",
+      "image": "harbor.ausmpc.pcf.dell.com/docker-store/jfrog-cli-devops:3.2.0-v1.0.1",
+      "essential": true
+    },
+	{
+      "name": "Jenkins",
+	  "repo": "https://hub.docker.com",
+      "image": "jenkins/jenkins:lts",
+      "essential": true
+    },
+	{
+      "name": "SonarQube",
+	  "repo": "https://gitlab.dell.com/devops/docker-store/sonarqube-devops",
+      "image": "harbor.ausmpc.pcf.dell.com/docker-store/sonarqube-devops:4.5.0-v1.0.1",
+      "essential": true
+    },
+    {
+      "name": "Logger",
+	  "repo": "https://hub.docker.com/r/fluent/fluentd/",
+      "image": "fluent/fluentd:v1.3-debian-1",
+      "essential": true
+    },
+    {
+      "name": "Monitor",
+	  "repo": "TBD",
+      "image": "nagios:latest",
+      "essential": true
+    },
+    {
+      "name": "IDE",
+	  "repo": "TBD",
+      "image": "mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019",
+      "essential": true
+    }    
+    
+  ]
+}
