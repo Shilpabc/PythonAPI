@@ -5,20 +5,20 @@ Created on Mon Sep 16 14:02:54 2019
 @author: Shilpa_Chikkannavar
 """
 
-from getdata import fetchData
+from getJsonData import readJsonData
 
 def fetchProd(prod):
     
     print("In fetchProd: ",prod)
-    contList = fetchData()
+    contList = readJsonData('M2.json')
     print("Data fetched")
     print(contList)
     
     
     for p in contList:
-        if (p[0] == prod):
+        if (p['name'] == prod):
             print("Matched")
-            print(p[0])
+            print(p['name'])
             result = p
             break
         else:

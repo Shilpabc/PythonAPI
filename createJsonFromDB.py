@@ -35,10 +35,12 @@ cur = db.cursor()
 cur.execute("SELECT * FROM contDef")
 
 def fetchData():
+
+    tp = cur.fetchall()
+    df = json.dumps(tp)
     jFileName="demodb.json"
-    df = pd.DataFrame()
-    df = cur.fetchall();
-    df.to_json(jFileName)
+    open(jFileName,"w").write(df)
+
     return jFileName
 # print all the first cell of all the rows
     
@@ -51,3 +53,6 @@ db.close()
 
 if __name__ == '__main__':
     df = fetchData()
+    
+
+    
