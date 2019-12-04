@@ -9,21 +9,37 @@ Created on Tue Nov 26 20:56:02 2019
 import MySQLdb
 import json
 import pandas as pd
+import configparser
 
-db = MySQLdb.connect(host="172.17.0.3",    # your host, usually localhost
-                     user="demouser",         # your username
-                     passwd="Welcome1!",  # your password
-                     db="demodb")        # name of the data base
+config = configparser.RawConfigParser()
+config.read('ConfigFile.properties')
+
+host=config.get('DatabaseSection', 'database.service')
+user=config.get('DatabaseSection', 'database.user')
+pwd=config.get('DatabaseSection', 'database.password')
+dbname=config.get('DatabaseSection', 'database.dbname')
+
+print("Hostname:",host)
+print("User:",user)
+print("Password:",pwd)
+print("dbname:",dbname)
+
+
+db = MySQLdb.connect(host,    # your host, usually localhost
+                     user,         # your username
+                     pwd,  # your password
+                     dbname)        # name of the data base
 cur = db.cursor()
 
 # Use all the SQL you like
 cur.execute("SELECT * FROM contDef")
 
 def fetchData():
-    
+    jFileName="demodb.json"
     df = pd.DataFrame()
     df = cur.fetchall();
-    return df
+    df.to_json(jFileName)
+    return jFileName
 # print all the first cell of all the rows
     
 def list():

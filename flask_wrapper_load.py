@@ -6,8 +6,8 @@ Created on Wed Nov 13 12:00:04 2019
 """
 
 from flask import Flask, render_template, request, jsonify
-from getdata import fetchData
-
+from getJsonData import readJsonData
+from createJsonFromDB import getJsonFname
 
 app = Flask(__name__)
 
@@ -19,7 +19,8 @@ def page_not_found(e):
 def getprod():
 
     try:  
-        res = fetchData()
+        jsonFname = getJsonFname()
+        res = readJsonData('M2.json')
 
     except Exception as e:
 	    return(str(e) + "ERROR")
