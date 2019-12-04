@@ -7,7 +7,7 @@ Created on Wed Nov 13 12:00:04 2019
 
 from flask import Flask, render_template, request, jsonify
 from getJsonData import readJsonData
-from createJsonFromDB import getJsonFname
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -19,19 +19,14 @@ def page_not_found(e):
 def getprod():
 
     try:  
-        jsonFname = getJsonFname()
-        res = readJsonData('M2.json')
-
+        df = pd.DataFrame()
+        df = readJsonData()
+        res = df.to_json(orient='index')
     except Exception as e:
 	    return(str(e) + "ERROR")
         
         
-    return jsonify(res)
+    return res
 
 if __name__ == '__main__':
     app.run(host='localhost', port=5000)
-
-
-
-
-    
